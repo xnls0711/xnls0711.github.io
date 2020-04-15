@@ -2,7 +2,16 @@
 if (false) {
     BK.Script.loadlib('GameRes://libs/qqplay-adapter.js');
 }
-
+var loadingText = document.getElementById('loadingText');
+var fakeLoadingPercent = 0;
+var fakeLoadingTimer = setInterval(function(){
+	fakeLoadingPercent += Math.floor((Math.random() * 100) + 1)/100;
+	if(fakeLoadingPercent >= 50){
+		clearInterval(fakeLoadingPercent);
+		fakeLoadingPercent = 50;
+	}
+	loadingText.innerHTML = fakeLoadingPercent.toFixed(0) + ' %';
+},200)
 window.boot = function () {
     var settings = window._CCSettings;
     window._CCSettings = undefined;
@@ -50,15 +59,20 @@ window.boot = function () {
     function setLoadingDisplay () {
         // Loading splash scene
         var splash = document.getElementById('splash');
-        var progressBar = splash.querySelector('.progress-bar span');
+        //var progressBar = splash.querySelector('.progress-bar span');
+        
         cc.loader.onProgress = function (completedCount, totalCount, item) {
-            var percent = 100 * completedCount / totalCount;
-            if (progressBar) {
-                progressBar.style.width = percent.toFixed(2) + '%';
+			clearInterval(fakeLoadingTimer);
+            var percent = 100 * completedCount / totalCount/2 + 50;
+            // if (progressBar) {
+                // progressBar.style.width = percent.toFixed(2) + '%';
+            // }
+			if (loadingText && totalCount > 1) {
+                loadingText.innerHTML = percent.toFixed(0) + ' %';
             }
         };
         splash.style.display = 'block';
-        progressBar.style.width = '0%';
+        // progressBar.style.width = '0%';
 
         cc.director.once(cc.Director.EVENT_AFTER_SCENE_LAUNCH, function () {
             splash.style.display = 'none';
@@ -66,6 +80,11 @@ window.boot = function () {
     }
 
     var onStart = function () {
+		// dataLayer.push({
+        //     'productKey': productKey,
+        //     'event': 'loadingProgression',
+        //     'param1' : 'start'
+        // });
         cc.loader.downloader._subpackages = settings.subpackages;
 
         cc.view.enableRetina(true);
@@ -122,6 +141,11 @@ window.boot = function () {
                         div.style.backgroundImage = '';
                     }
                 }
+				// dataLayer.push({
+				// 	'productKey': productKey,
+				// 	'event': 'loadingProgression',
+				// 	'param1' : 'end'
+				// });
                 cc.loader.onProgress = null;
                 console.log('Success to load scene: ' + launchScene);
             }
@@ -132,7 +156,7 @@ window.boot = function () {
     var jsList = settings.jsList;
 
     if (false) {
-        BK.Script.loadlib();
+        //BK.Script.loadlib(<%=projectCode%>);
     }
     else {
         var bundledScript = settings.debug ? 'src/project.dev.js' : 'src/project.js';
@@ -146,7 +170,7 @@ window.boot = function () {
             jsList = [bundledScript];
         }
     }
-    
+    //<Inject anysdk scripts>
     var option = {
         id: 'GameCanvas',
         scenes: settings.scenes,
@@ -163,9 +187,9 @@ window.boot = function () {
 
 // main.js is qqplay and jsb platform entry file, so we must leave platform init code here
 if (false) {
-    BK.Script.loadlib('GameRes://src/settings.js');
-    BK.Script.loadlib();
-    BK.Script.loadlib('GameRes://libs/qqplay-downloader.js');
+    // BK.Script.loadlib('GameRes://src/settings.js');
+    // BK.Script.loadlib(<%=engineCode%>);
+    // BK.Script.loadlib('GameRes://libs/qqplay-downloader.js');
 
     var ORIENTATIONS = {
         'portrait': 1,
@@ -181,7 +205,7 @@ if (false) {
     qqPlayDownloader.REMOTE_SERVER_ROOT = "";
     var prevPipe = cc.loader.md5Pipe || cc.loader.assetLoader;
     cc.loader.insertPipeAfter(prevPipe, qqPlayDownloader);
-    
+
     window.boot();
 }
 else if (window.jsb) {
