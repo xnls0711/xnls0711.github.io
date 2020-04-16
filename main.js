@@ -73,17 +73,15 @@ window.boot = function () {
 
         if (!false && !false) {
             if (cc.sys.isBrowser) {
-				console.log('isBrowser');
                 setLoadingDisplay();
             }
 
             if (cc.sys.isMobile) {
-				console.log('isMobile');
                 if (settings.orientation === 'landscape') {
                     cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
                 }
                 else if (settings.orientation === 'portrait') {
-                    cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
+                    cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
                 }
                 cc.view.enableAutoFullScreen([
                     cc.sys.BROWSER_TYPE_BAIDU,
