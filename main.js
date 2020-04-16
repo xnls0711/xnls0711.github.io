@@ -81,7 +81,7 @@ window.boot = function () {
                     cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
                 }
                 else if (settings.orientation === 'portrait') {
-                    cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
+                    cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
                 }
                 cc.view.enableAutoFullScreen([
                     cc.sys.BROWSER_TYPE_BAIDU,
