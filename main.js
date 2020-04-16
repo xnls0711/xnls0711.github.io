@@ -73,10 +73,12 @@ window.boot = function () {
 
         if (!false && !false) {
             if (cc.sys.isBrowser) {
+				console.log('isBrowser');
                 setLoadingDisplay();
             }
 
             if (cc.sys.isMobile) {
+				console.log('isMobile');
                 if (settings.orientation === 'landscape') {
                     cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
                 }
