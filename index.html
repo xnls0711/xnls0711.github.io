@@ -1,24 +1,22 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <link rel='icon' href='favicon.ico'> </link>
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="apple-touch-startup-image" href="apple-touch-icon.png">
-  
-  <!--laucher icon in manifest -->
-  <link rel="manifest" href="manifest.json">
   <meta charset="utf-8">
 
-  <title>LUDI Bingo</title>
+  <title>Jellimon</title>
 
   <!--http://www.html5rocks.com/en/mobile/mobifying/-->
-  <meta name="viewport"
-        content="width=device-width,user-scalable=no,initial-scale=1, minimum-scale=1,maximum-scale=1"/>
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1, minimum-scale=1,maximum-scale=1"/>
 
   <!--https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html-->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="format-detection" content="telephone=no">
+
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="robots" content="index,follow" />
+  <meta name="title" content="Jellimon" />
 
   <!-- force webkit on 360 -->
   <meta name="renderer" content="webkit"/>
@@ -33,8 +31,8 @@
   <meta name="360-fullscreen" content="true"/>
   
   <!-- force screen orientation on some browser -->
-  <meta name="screen-orientation" content="portrait"/>
-  <meta name="x5-orientation" content="portrait">
+  <meta name="screen-orientation" content="landscape"/>
+  <meta name="x5-orientation" content="landscape">
 
   <!--fix fireball/issues/3568 -->
   <!--<meta name="browsermode" content="application">-->
@@ -43,161 +41,108 @@
   <!--<link rel="apple-touch-icon" href=".png" />-->
   <!--<link rel="apple-touch-icon-precomposed" href=".png" />-->
 
-  <link rel="stylesheet" type="text/css" href="style-mobile.css"/>
-
+  <link id="stylesheet" rel="stylesheet" type="text/css" href="style-mobile.css"/>
+  <!-- custom cocos css -->
+  <link rel="stylesheet" type="text/css" href="style-custom.css"/>
+  
+  <!-- * Bug Fixed ['10588775']: '[HTML5][1.6]: - “What is the Favicon of the AUT?” -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="apple-touch-startup-image" href="favicon.png">
+  
+  <!--laucher icon in manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta charset="utf-8">
+	<!-- All global variable should be here -->
+    <script type='text/javascript'>
+        var enableADS = true;
+        var useZipLib = true;
+        dataLayer = [];
+		dataLayer.push({'publisher':'GAMELOFT'});
+        var productKey = "";
+		var productTitle = "Jellimon"; // for tracking game name
+        var gtmID = "";
+        if (enableADS){
+            gtmID = 'GTM-W4F73N'; //
+			productKey = "jellimonFree";
+			var adsSDK_url = '//cdn.ludigames.com/h5ads/js/games_lib/adsSDK/adsSDK.js';
+			var adsSDK_gameConfigUrl = '//cdn.ludigames.com/h5ads/js/games_lib/adsSDK/game_config.js';
+			var ima3Url = '//imasdk.googleapis.com/js/sdkloader/ima3.js';
+        }
+        else{
+            gtmID = 'GTM-K74X66';
+			productKey = "jellimon";
+        }
+       
+	</script>
+  
+	<!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PLZ2PKZ');
+    </script>
+	<!-- End Google Tag Manager -->
+	<script src="accessCookie.js"></script>
 </head>
 <body>
-	<!-- gtm and ads init -->    
-    <script type='text/javascript'>
-        var enableADS = false;
-        dataLayer = [];
-        var productKey = "";
-        var gtmID = "";
-        if (enableADS)
-        {
-            gtmID = 'GTM-W4F73N';
-			productKey = "ludiBingoFree";
-        }
-        else
-        {
-            gtmID = 'GTM-K74X66';
-			productKey = "ludiBingo";
-        }
-        // dataLayer.push({
-        //   'productKey': '' + productKey
-        // });
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer',gtmID); 
-	</script>    
-	<!-- gtm and ads end -->    
-    <!--script src="i18n-supported-languages.js" charset="utf-8"></script-->
-	<!-- common functions -->    
-    <script type='text/javascript'>
-        function insertScript(d, s, id, url) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s);
-            js.id = id;
-            js.src = url;
-            fjs.parentNode.insertBefore(js, fjs);
-        }
-        function loadOrderScript(url1, url2){
-            var script1 = document.createElement('script');
-            script1.setAttribute('src', url1);
-            script1.onload = function() {
-                // console.log('url2: ' + url2);
-                if (typeof(url2) != 'undefined')
-                {
-                    var script2 = document.createElement('script');
-                    script2.setAttribute('src', url2);                    
-                    document.body.appendChild(script2);
-                }
-            }
-            document.body.appendChild(script1);
-        }
-	</script>
-	<!-- common functions end -->   
-	
-    <!-- ads --> 
+	<!-- gtm and ads init -->
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLZ2PKZ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 
-    <script type='text/javascript'>
-        console.log("enableADS: " + enableADS);        
-        /*var lang_load = localStorage.getItem(window.btoa(productKey+"__gamesave-language"));
-		if(lang_load == null){
-			var currLanguage_load = window.navigator.language;
-			currLanguage_load = currLanguage_load ? currLanguage_load : window.navigator.browserLanguage;
-			currLanguage_load = currLanguage_load ? currLanguage_load.split("-")[0] : "en";
-			var supported_languages_load = window.i18n.supported_languages || [];
-			if(supported_languages_load.length > 0 && supported_languages_load.indexOf(currLanguage_load) == -1) {   // system lang not support -> choose the 1st
-				currLanguage_load = supported_languages_load[0];
-			}
-			lang_load = currLanguage_load;
-			
-		}else{
-			lang_load = window.atob(lang_load);
-		}
+    <!-- common functions -->
+    <script type='text/javascript'>        
+		function insertScript(e,t,n,r){var a,i=e.getElementsByTagName(t)[0];e.getElementById(n)||((a=e.createElement(t)).id=n,a.src=r,i.parentNode.insertBefore(a,i))}		
+		function loadOrderScript(t,e,d){var n=document.createElement("script");n.setAttribute("src",t),n.onload=function(){if(void 0!==e){var t=document.createElement("script");t.setAttribute("src",e),t.onload=function(){if(void 0!==d){var t=document.createElement("script");t.setAttribute("src",d),t.onload=function(){"undefined"!=window.playAds&&window.playAds()},document.body.appendChild(t)}},document.body.appendChild(t)}},document.body.appendChild(n)}
+		function getReferrer(){if(window.referrer=getCookie("root_referrer"),""!=window.referrer)console.log("referal"+window.referrer);else{var r=document.referrer;if(""!=r)setCookie("root_referrer",r),window.referrer=r;else{var e=window.location.search;window.referrer="https://play.ludigames.com"+e}console.log("redirect to play.ludigames.com"+window.referrer)}return window.referrer}
 		
-		insertScript(document,'script', 'lodingText', lang_load + '.js');
-		window.loading_index = 1;
-		function setLoadingText(){
-			if(document.getElementById("loadingText") && window.i18n.languages){
-				document.getElementById("loadingText").innerHTML = window.i18n.languages[lang_load].main["loading_"+window.loading_index];
-				window.loading_index += 1;
-				if(window.loading_index > 5){
-					window.loading_index = 1;
-					clearInterval(window.loadingTimer);
-				}
-			}
-		}
-		window.loadInterval = 3000;
-		window.loadingTimer = setInterval(setLoadingText, window.loadInterval);*/
-        if (enableADS)
-        {
-            loadOrderScript('//imasdk.googleapis.com/js/sdkloader/ima3.js', 'adsSDK/adsSDK.js');
-            // loadOrderScript('//imasdk.googleapis.com/js/sdkloader/ima3_debug.js', 'adsSDK/adsSDK.js');			
-        }
-		
-		// should load ludi before fb
-        ludiSDKAsyncInit = function() {
-            console.log("ludiSDKAsyncInit ");                
-        };
-        // add ludisdk to document
-        //insertScript(document,'script', 'ludisdk', '//play.ludigames.com/js/games_lib/ludiSDK.js');            
-        
-    </script>   
-    <!-- ads end -->
+		getReferrer();		
+    </script>
+    <!-- common functions end -->
+	
+  <!-- div container for web desktop -->
+  <div id="GameDiv" style="width: 640px; height: 960px; display: none"></div>
+
   <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
   <div id="splash">
-	<div class="loadingAnim" id="loadingAnim">
-		<img class="loadingAnim" src="loading.gif" >
-		<div class="loadingText" id="loadingText"></div>
-	</div>
-	<!--div class="load_bg" id="load_bg">
-		
-	</div>
-	<div class="truck" id="truck">
-		<img class="truck" src="UI_loading_truck.png" >
-	</div-->
-	
-    <!--div class="progress-bar stripes">
+    <div class="progress-bar stripes">
       <span style="width: 0%"></span>
-    </div-->
-		<div class="gameVersion">
-			<h4 class="gameVersion">1.0.0</h4>
-		</div>
+    </div>
   </div>
-	<div id="adsContainer" style="margin:0;padding:0">
-	</div>
-<script src="src/settings.js" charset="utf-8"></script>
+  <div id="adsContainer" style="margin:0;padding:0"></div>
+  <script src="src/settings.js" charset="utf-8"></script>
 
-<script src="main.js" charset="utf-8"></script>
+  
+    <script src="main.js" charset="utf-8"></script>
+    <!-- inject by post-build-text-data -->
+    <script src="unzip.min.js" charset="utf-8"></script>
+    <script src="unzip-loader.js" charset="utf-8"></script>
 
-<script type="text/javascript">
-(function () {
-    // open web debugger console
-    if (typeof VConsole !== 'undefined') {
-        window.vConsole = new VConsole();
-    }
 
-    var splash = document.getElementById('splash');
-    splash.style.display = 'block';
+  <script type="text/javascript">
+    (function () {
+        // open web debugger console
+        if (typeof VConsole !== 'undefined') {
+            window.vConsole = new VConsole();
+        }
 
-    var cocos2d = document.createElement('script');
-    cocos2d.async = true;
-    cocos2d.src = window._CCSettings.debug ? 'cocos2d-js.js' : 'cocos2d-js-min.js';
+        var splash = document.getElementById('splash');
+        splash.style.display = 'block';
 
-    var engineLoaded = function () {
-        document.body.removeChild(cocos2d);
-        cocos2d.removeEventListener('load', engineLoaded, false);
-        window.boot();
-    };
-    cocos2d.addEventListener('load', engineLoaded, false);
-    document.body.appendChild(cocos2d);
-})();
-</script>
+        var cocos2d = document.createElement('script');
+        cocos2d.async = true;
+        cocos2d.src = window._CCSettings.debug ? 'cocos2d-js.js' : 'cocos2d-js-min.js';
 
+        var engineLoaded = function () {
+            document.body.removeChild(cocos2d);
+            cocos2d.removeEventListener('load', engineLoaded, false);
+            window.boot();
+        };
+        cocos2d.addEventListener('load', engineLoaded, false);
+        document.body.appendChild(cocos2d);
+    })();
+  </script>
+
+  <!-- custom script loader to extend cocos -->
+  <script src="post-custom.js" charset="utf-8"></script>
 </body>
 </html>
