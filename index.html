@@ -7,7 +7,7 @@
 	<b:if cond='data:view.featuredImage'>
     <meta expr:content='resizeImage(data:view.featuredImage, 1200, &quot;1200:630&quot;)' property='og:image'/>
 	<b:elseif cond='data:widgets'/>
-    <b:loop reverse='true' values='data:widgets.Blog.first.posts where (p =&gt; p.featuredImage) map (p =&gt; p.featuredImage)' var='imageUrl'>
+    <b:loop reverse='true' values='data:widgets.Blog.first.posts where (p =&gt; p.featuredImage) map (p =&gt; p.featuredImage)' var='https://xnls0711.github.io/Splash_960x640.png'>
     <meta expr:content='resizeImage(data:imageUrl, 1200, &quot;1200:630&quot;)' property='og:image'/>
     </b:loop>
 	<b:elseif cond='data:blog.postImageUrl'/>
@@ -25,7 +25,7 @@
   <meta name="format-detection" content="telephone=no">
 
   <meta name="keywords" content="" />
-  <meta name="description" content="" />
+  <meta name="description" content="JellimonFree-Gameloft" />
   <meta name="robots" content="index,follow" />
   <meta name="title" content="Jellimon" />
 
